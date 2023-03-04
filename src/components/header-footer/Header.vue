@@ -29,6 +29,7 @@
     height: var(--header-height);
     box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.05);
     background-color: white;
+    z-index: 999;
 }
 .header-padding{
     height: var(--header-height);
