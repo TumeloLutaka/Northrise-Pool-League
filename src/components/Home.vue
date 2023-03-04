@@ -315,6 +315,12 @@
   padding: 60px;
   text-align: center;
 }
+.registration a{
+  color:#e98824;
+}
+  .registration a:hover{
+    color: #f89d19;
+  }
 .registration p {
   font-size: 18px;
   color: #777;

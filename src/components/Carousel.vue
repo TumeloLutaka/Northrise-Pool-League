@@ -1,9 +1,9 @@
 <template>
     <div class="carousel">
-        <p class="carousel-button next" @click="prev">Prev</p>
+        <p class="carousel-button" @click="prev">Prev</p>
         <div class="carousel-slider" ref="carousel-slider">
             <ul class='slider'>
-                <li data-current-card="" v-for="(player, index) in players">
+                <li v-for="(player, index) in players">
                     <div class="player-card">
                         <img :src="getRandomImage()" alt="Profile Picture">
                         <p>Name: {{ player.name }}</p>
@@ -14,7 +14,7 @@
                 </li>
             </ul>
         </div>
-        <p class="carousel-button prev" @click="next">Next</p>
+        <p class="carousel-button" @click="next">Next</p>
     </div>
 </template>
 
@@ -30,43 +30,41 @@
                 ],
                 currentCard:"",
                 slider:"", 
-                translation: 0
             }
         },
         mounted(){
             this.slider = document.querySelector(".slider");
             this.currentCard = this.slider.firstElementChild;
-            this.currentCard.setAttribute("data-current-card", "this");
+            this.currentCard.classList.add("show");
+
             setInterval(() => {this.next()}, 10000);
         },
         methods:{
             next(){
+                this.currentCard.classList.remove("show");
                 //Check if item has a next sibling
                 if(this.currentCard.nextElementSibling === null){
-                    this.slider.firstElementChild.setAttribute("data-current-card", "this");
-                    this.currentCard.setAttribute("data-current-card", "");
                     this.currentCard = this.slider.firstElementChild;
+                    this.currentCard.classList.add("show");
                     return;
                 }
                 
                 //Make the next sibling the current card.
-                this.currentCard.nextSibling.setAttribute("data-current-card", "this");
-                this.currentCard.setAttribute("data-current-card", "");
-                this.currentCard = this.currentCard.nextSibling;
+                this.currentCard = this.currentCard.nextElementSibling;
+                this.currentCard.classList.add("show");
             },
             prev(){
+                this.currentCard.classList.remove("show");
                 //Check if item has a next sibling
                 if(this.currentCard.previousElementSibling === null){
-                    this.slider.lastElementChild.setAttribute("data-current-card", "this");
-                    this.currentCard.setAttribute("data-current-card", "");
                     this.currentCard = this.slider.lastElementChild;
+                    this.currentCard.classList.add("show");
                     return;
                 }
                 
                 //Make the next sibling the current card.
-                this.currentCard.previousSibling .setAttribute("data-current-card", "this");
-                this.currentCard.setAttribute("data-current-card", "");
-                this.currentCard = this.currentCard.previousSibling ;
+                this.currentCard = this.currentCard.previousElementSibling ;
+                this.currentCard.classList.add("show");
             },
             getRandomImage() {
                 const randomNumber = Math.floor(Math.random() * 1000); // Generate a random number between 0 and 999
@@ -76,9 +74,24 @@
     }
 </script>
 
-<style>
-li[data-current-card=""]{
-    display:none;
+<style scoped>
+li{
+    min-width: 0;
+    max-width: 0;
+    min-height: 0;
+    max-height: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out,  
+                min-width 0s ease 1s,
+                min-height  0s ease 1s;
+}
+li.show{
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 1;
+    transition: opacity 1s ease-in-out 1s,
+                min-width 0s ease 1s,
+                min-height  0s ease 1s;
 }
 .carousel{
     display: flex;
