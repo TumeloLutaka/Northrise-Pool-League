@@ -6,9 +6,11 @@
                 <li v-for="(player, index) in players">
                     <div class="player-card">
                         <img :src="getRandomImage()" alt="Profile Picture">
-                        <p>Name: {{ player.name }}</p>
-                        <p>Wins: {{ player.Wins }}</p>
-                        <p>Points {{ player.Points }}</p>
+                        <h1 class="name">{{ player.name }}</h1>
+                        <div class="player-card-stats">
+                            <p>Wins <br/>{{ player.Wins }}</p>
+                            <p>Points <br/>{{ player.Points }}</p>
+                        </div>
                         <div class="player-card-button" @click="next">View More</div>
                     </div>
                 </li>
@@ -161,7 +163,17 @@ li.show{
     object-fit: cover;
     border-radius:20px;
 }
-.player-card p{
-    margin: 5px 0;
+.player-card h1{
+    font-size: 32px;
+}
+.player-card-stats{
+    display: flex;
+    flex-direction: row;
+}
+.player-card-stats p{
+    font-size: 25px;
+    margin: 5px 20px;
+    text-align: center;
+    opacity: 0.8;
 }
 </style>
