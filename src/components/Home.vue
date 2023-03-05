@@ -87,6 +87,8 @@
   </template>
   
   <script>
+    import * as firebase from '../javascript/firebase.js';
+
     import Carousel from './Carousel.vue'
 
     export default {
@@ -120,6 +122,7 @@
       created() {
         // Make API calls to fetch data for the standings, recent matches, and player profiles
         // and set the corresponding data properties
+        // firebase.addNewDoc();
       }
     }
   </script>
@@ -249,7 +252,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 0 20px 0;
+  padding: 40px 0 40px 0;
 }
 .profiles h2{
   margin: 0 0 20px 0;
