@@ -40,12 +40,9 @@ export function SeeData (){
 
 }
 
-export function addNewDoc(){
-    addDoc(colRef, {
-        "First Name": "Kabelo",
-        "Last Name": "Lutaka",
-        "Student Id": "1905173"
-    })
+export function AddPlayer(playerObj){
+    // alert("Working");
+    addDoc(colRef, playerObj)
 }
 
 

@@ -15,6 +15,9 @@
 </template>
 
 <style scoped>
+h1{
+    color: #2b2b2b;
+}
 .content{
     width: fit-content;
     height: fit-content;

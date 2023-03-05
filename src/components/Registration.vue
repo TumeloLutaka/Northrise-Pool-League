@@ -42,7 +42,8 @@
   </template>
   
 <script>
-  // import { addNewDoc } from '../javascript/firebase';
+  import {AddPlayer} from  '../javascript/firebase'
+
   export default{
     methods:{
       validation(){
@@ -57,6 +58,14 @@
         });
         
         if (allClear) {
+          //Get all the information and 
+          AddPlayer({
+            "First Name": document.querySelector("#firstName").value,
+            "Last Name": document.querySelector("#lastName").value,
+            "Student ID Number": document.querySelector("#studentId").value,
+            "Program": document.querySelector("#program").value,
+            "Phone Number": document.querySelector("#phone").value
+          });
           alert('All clear!');
         }else{
           alert("Enter all details!");
