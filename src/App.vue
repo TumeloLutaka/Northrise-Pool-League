@@ -16,6 +16,9 @@ export default {
   components: {
     'comp-header':Header,
     'comp-footer':Footer
+  },
+  mounted(){
+    this.$store.dispatch("FetchPlayers");
   }
 }
 </script>
@@ -23,6 +26,14 @@ export default {
 <style>
 :root{
     --header-height: 80px;
+
+    /* Colors */
+    --col-green-nu:#8bab5c;
+    --col-orange-nu:#e98824;
+    --col-grey-header:#2b2b2b;
+    --col-grey-text:#777;
+    --col-grey-background:#f3f3f3;
+    --col-white-main:#fff;
 }
 
 *{

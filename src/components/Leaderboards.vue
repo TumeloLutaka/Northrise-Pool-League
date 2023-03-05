@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <section class="leaderboard">
       <h1>Northrise University Pool League Leaderboards</h1>
       <table class="leaderboard-table">
         <thead>
           <tr>
-            <th>Pos</th>
+            <th>  <!-- Pos --> </th>
             <th>Player</th>
             <th>Matches Played</th>
             <th>Matches Won</th>
@@ -17,9 +17,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(player, index) in leaderboard" :key="index">
-            <td>{{ player.pos }}</td>
-            <td>{{ player.player }}</td>
+          <tr v-for="(player, index) in players" :key="index">
+            <td>{{ index + 1 }}</td>
+            <td>{{player["First Name"]}} {{ player["Last Name"]}}</td>
             <td>{{ player.matchesPlayed }}</td>
             <td>{{ player.matchesWon }}</td>
             <td>{{ player.matchesLost }}</td>
@@ -27,87 +27,64 @@
             <td>{{ player.dmWon }}</td>
             <td>{{ player.dmLost }}</td>
             <td>{{ player.totalMatches }}</td>
-            <td>{{ player.points }}</td>
+            <td>{{ 5}}</td>
           </tr>
         </tbody>
       </table>
-    </div>
+    </section>
   </template>
     
 <script>
 export default {
-  data() {
-    return {
-      leaderboard: [
-        {
-          pos: 1,
-          player: 'John Doe',
-          matchesPlayed: 6,
-          matchesWon: 4,
-          matchesLost: 2,
-          debutMatchesPlayed: 2,
-          dmWon: 1,
-          dmLost: 1,
-          totalMatches: 8,
-          points: 8,
-        },
-        {
-          pos: 1,
-          player: 'Jane Doe',
-          matchesPlayed: 6,
-          matchesWon: 4,
-          matchesLost: 2,
-          debutMatchesPlayed: 2,
-          dmWon: 1,
-          dmLost: 1,
-          totalMatches: 8,
-          points: 8,
-        },
-        {
-          pos: 1,
-          player: 'Tumelo Lutaka',
-          matchesPlayed: 6,
-          matchesWon: 4,
-          matchesLost: 2,
-          debutMatchesPlayed: 2,
-          dmWon: 1,
-          dmLost: 1,
-          totalMatches: 8,
-          points: 8,
-        },
-        // Add more objects for each player in the league
-      ],
-    };
-  },
+  computed: {
+    players() {
+      return this.$store.state.players;
+    },
+  }
 };
 </script>
 
 <style>
-.leaderboard-table {
+.leaderboard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0; 
+}
+
+.leaderboard-table{
+  font-size: 15px;
+  min-width: 400px;
+  width: 90%;
+  margin: 25px 0;
   border-collapse: collapse;
-  width: 100%;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.leaderboard-table thead tr{
+  font-weight: 600;
+  text-align: left;
+  background-color: var(--col-green-nu);
+  color: var(--col-white-main);
 }
 
-.leaderboard-table th,
-.leaderboard-table td {
-  padding: 8px;
-  text-align: center;
+.leaderboard-table th, 
+.leaderboard-table td{
+  padding: 12px 15px;
+}
+.leaderboard-table tbody tr{
+  border-bottom: 1px solid var(--col-grey-text);
+}
+.leaderboard-table tbody tr:nth-of-type(even){
+  background-color: var(--col-grey-background);
+}
+.leaderboard-table tbody tr:last-of-type{
+  border-bottom: 2px solid var(--col-green-nu);
+}
+.leaderboard-table tbody tr:hover{
+  font-weight: bold;
+  color: var(--col-green-nu);
 }
 
-.leaderboard-table th {
-  background-color: #e98824;
-  color: #fff;
-}
-
-.leaderboard-table tr:nth-child(even) {
-  background-color: #8bab5c;
-}
-
-.leaderboard-table tr:nth-child(odd) {
-  background-color: #8d191c;
-}
-
-.leaderboard-table tr:hover {
-  background-color: #d0d0d0;
-}
 </style>

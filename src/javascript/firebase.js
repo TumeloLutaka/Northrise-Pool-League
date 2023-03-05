@@ -25,21 +25,23 @@ const db = getFirestore()
 const colRef = collection(db, 'player')
 
 //get collection data
-export function SeeData (){
-    getDocs(colRef)
-.then((snapshot => {
-    let books = [];
-    snapshot.docs.forEach((doc) => {
-        books.push({...doc.data(), id: doc.id})
+export async function FetchPlayers (){
+     const data = await getDocs(colRef)
+    .then((snapshot => {
+        let players = [];
+        snapshot.docs.forEach((player) => {
+            players.push({...player.data(), id: player.id})
+        })
+        // console.log(players);
+        return players;
+    }))
+    .catch(err => {
+        console.log(err);
     })
-    console.log(books);
-}))
-.catch(err => {
-    console.log(err);
-})
+
+    return data;
 
 }
-
 export function AddPlayer(playerObj){
     // alert("Working");
     addDoc(colRef, playerObj)
