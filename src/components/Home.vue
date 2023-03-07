@@ -47,15 +47,15 @@
             <table class="recent-standings-table">
               <thead>
                 <tr>
-                  <th>Name</th>
+                  <th style="text-align: left; padding-left: 8px;">Name</th>
                   <th>Matches Played</th>
                   <th>Points</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="player in players" :key="player.id">
-                  <td>{{ player["First Name"] }} {{ player["Last Name"] }}</td>
-                  <td>{{ player["Matches"]}}</td>
+                  <td style="text-align: left; padding-left: 10px;">{{ player["First Name"] }} {{ player["Last Name"] }}</td>
+                  <td>{{ player["Wins"] + player["Loses"]}}</td>
                   <td>{{ player.Points }}</td>
                 </tr>
               </tbody>
@@ -127,10 +127,6 @@
   </script>
   
   <style scoped>
-  *{
-    color: #777;
-  }
-
   P{
     font-size: 18px;
     /* font-weight: 600; */
@@ -292,31 +288,46 @@
   align-items: center;
 }
 .recent-standings-table{
-  font-size: 18px;
+  font-size: 15px;
+  min-width: 400px;
+  width: 90%;
+  margin: 25px 0;
   border-collapse: collapse;
-  border: 2px solid #8bab5c;
-  border-radius: 50%;
-  margin-top: 10px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 .recent-standings-table th{
-  color: #fff;
+  color: var(--col-white-main);
 }
-.recent-standings-table thead{
-  background-color: #8bab5c;
+.recent-standings-table thead tr{
+  font-weight: 600;
+  /* text-align: left; */
+  background-color: var(--col-green-nu);
+  color: var(--col-white-main);
 }
-.recent-standings-table th, td{
+.recent-standings-table th, 
+.recent-standings-table td{
+  padding: 18px 0px;
+}
+.recent-standings-table tbody {
   text-align: center;
-  padding: 20px;
+}
+.recent-standings-table tbody tr{
+  border-bottom: 1px solid var(--col-grey-text);
+}
+.recent-standings-table tbody tr:nth-of-type(even){
+  background-color: var(--col-grey-background);
+}
+.recent-standings-table tbody tr:last-of-type{
+  border-bottom: 2px solid var(--col-green-nu);
+}
+.recent-standings-table tbody tr:hover{
+  font-weight: bold;
+  color: var(--col-green-nu);
 }
 
-.registration {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f8f8f8;
-  padding: 60px;
-  text-align: center;
-}
+
 .registration a{
   color:#e98824;
 }
