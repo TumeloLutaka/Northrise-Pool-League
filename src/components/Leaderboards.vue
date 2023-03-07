@@ -1,36 +1,44 @@
 <template>
     <section class="leaderboard">
-      <h1>Northrise University Pool League Leaderboards</h1>
+      <h1 style="color:var(--col-grey-header)">Northrise University Pool League Leaderboards</h1>
       <table class="leaderboard-table">
         <thead>
           <tr>
             <th>  <!-- Pos --> </th>
-            <th>Player</th>
-            <th>Matches Played</th>
-            <th>Matches Won</th>
-            <th>Matches Lost</th>
-            <th>Debut Matches Played</th>
-            <th>DM Won</th>
-            <th>DM Lost</th>
-            <th>Total Matches</th>
-            <th>Points</th>
+            <th style="text-align: left;">Player</th>
+            <th>MP</th>
+            <th>MW</th>
+            <th>ML</th>
+            <th>DMP</th>
+            <th>DMW</th>
+            <th>DML</th>
+            <th>Pts</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(player, index) in players" :key="index">
             <td>{{ index + 1 }}</td>
-            <td>{{player["First Name"]}} {{ player["Last Name"]}}</td>
-            <td>{{ player.matchesPlayed }}</td>
-            <td>{{ player.matchesWon }}</td>
-            <td>{{ player.matchesLost }}</td>
-            <td>{{ player.debutMatchesPlayed }}</td>
-            <td>{{ player.dmWon }}</td>
-            <td>{{ player.dmLost }}</td>
-            <td>{{ player.totalMatches }}</td>
-            <td>{{ 5}}</td>
+            <td style="text-align: left;">{{ player["First Name"]}} {{ player["Last Name"]}}</td>
+            <td>{{ player["Wins"] + player["Loses"]}}</td>
+            <td>{{ player["Wins"] }}</td>
+            <td>{{ player["Loses"] }}</td>
+            <td>{{ player["Debut Wins"] + player["Debut Loses"] }} </td>
+            <td>{{ player["Debut Wins"] }}</td>
+            <td>{{ player["Debut Loses"] }}</td>
+            <td>{{ player["Points"]}}</td>
           </tr>
         </tbody>
       </table>
+
+      <div class="leaderboard-table-legend">
+          <p>MP  - Matches Played</p>
+          <p>MW  - Matches Won</p>
+          <p>ML  - Matches Lost</p>
+          <p>DMP - Debut Matches Played</p>
+          <p>DMW - Debut Matches Won</p>
+          <p>DML - Debut Matches Lost</p>
+          <p>Pts - Points</p>
+        </div>
     </section>
   </template>
     
@@ -38,7 +46,8 @@
 export default {
   computed: {
     players() {
-      return this.$store.state.players;
+      let players = this.$store.state.players;
+      return players.sort((a, b) => b.Points - a.Points);
     },
   }
 };
@@ -51,7 +60,14 @@ export default {
   align-items: center;
   padding: 40px 0; 
 }
-
+.leaderboard-table-legend{
+  font-size: 18px;
+  /* padding: 20px; */
+}
+.leaderboard-table-legend p{
+  margin: 10px 0;
+  /* padding: 20px; */
+}
 .leaderboard-table{
   font-size: 15px;
   min-width: 400px;
@@ -64,14 +80,16 @@ export default {
 }
 .leaderboard-table thead tr{
   font-weight: 600;
-  text-align: left;
+  /* text-align: left; */
   background-color: var(--col-green-nu);
   color: var(--col-white-main);
 }
-
 .leaderboard-table th, 
 .leaderboard-table td{
-  padding: 12px 15px;
+  padding: 12px 0px;
+}
+.leaderboard-table tbody {
+  text-align: center;
 }
 .leaderboard-table tbody tr{
   border-bottom: 1px solid var(--col-grey-text);

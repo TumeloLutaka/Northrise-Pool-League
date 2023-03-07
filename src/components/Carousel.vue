@@ -1,14 +1,15 @@
 <template>
     <div class="carousel">
         <p class="carousel-button" @click="prev">Prev</p>
-        <div class="carousel-slider" ref="carousel-slider">
+        <div class="carousel-slider">
             <ul class='slider'>
-                <li v-for="(player, index) in players">
+                <li v-for="(player, index) in players" :class="index === 0 ? 'show' : ''">
                     <div class="player-card">
                         <img :src="getRandomImage()" alt="Profile Picture">
-                        <h1 class="name">{{ player.name }}</h1>
+                        <h1 class="name">{{ player["First Name"] }} {{ player["Last Name"] }}</h1>
                         <div class="player-card-stats">
-                            <p>Wins <br/>{{ player.Wins }}</p>
+                            <p>Played <br/>{{ player["Wins"] + player.Loses }}</p>
+                            <p>Won <br/> {{ player["Wins"] }}</p>
                             <p>Points <br/>{{ player.Points }}</p>
                         </div>
                         <div class="player-card-button" @click="next">View More</div>
@@ -22,55 +23,73 @@
 
 <script>
     export default{
-        data(){
-            return{
-                players:[
-                    {name: "Jane", Wins: 3, Points: 88},
-                    {name: "John", Wins: 44, Points: 67},
-                    {name: "Jack", Wins: 45, Points: 88},
-                    {name: "Jade", Wins: 67, Points: 99},
-                ],
-                currentCard:"",
-                slider:"", 
-            }
-        },
         mounted(){
             this.slider = document.querySelector(".slider");
-            this.currentCard = this.slider.firstElementChild;
-            this.currentCard.classList.add("show");
-
-            setInterval(() => {this.next()}, 10000);
+            this.startInterval();
+        },
+        data(){
+            return{
+                currentCard: null,
+                slider: null,
+                interval: null
+            }
+        },  
+        computed:{
+            players(){
+                return this.$store.state.players
+            }
         },
         methods:{
             next(){
+                //Check which element currently has the show class
+                if(this.currentCard === null) 
+                    this.currentCard = document.querySelector(".show"); 
+
                 this.currentCard.classList.remove("show");
                 //Check if item has a next sibling
                 if(this.currentCard.nextElementSibling === null){
                     this.currentCard = this.slider.firstElementChild;
                     this.currentCard.classList.add("show");
+                    this.startInterval()
                     return;
                 }
                 
                 //Make the next sibling the current card.
                 this.currentCard = this.currentCard.nextElementSibling;
                 this.currentCard.classList.add("show");
+                this.startInterval()
             },
             prev(){
+                //Check which element currently has the show class
+                if(this.currentCard === null) 
+                    this.currentCard = document.querySelector(".show"); 
+
                 this.currentCard.classList.remove("show");
                 //Check if item has a next sibling
                 if(this.currentCard.previousElementSibling === null){
                     this.currentCard = this.slider.lastElementChild;
                     this.currentCard.classList.add("show");
+                    this.startInterval()
                     return;
                 }
                 
                 //Make the next sibling the current card.
                 this.currentCard = this.currentCard.previousElementSibling ;
                 this.currentCard.classList.add("show");
+                this.startInterval()
             },
             getRandomImage() {
                 const randomNumber = Math.floor(Math.random() * 1000); // Generate a random number between 0 and 999
                 return `https://source.unsplash.com/featured/200x200/?face&${randomNumber}`;
+            },
+            startInterval(){
+                if(this.interval !== null)
+                    clearInterval(this.interval);
+
+                this.interval = setInterval(() => {
+                    if(this.slider.childElementCount > 0)
+                    this.next()
+                }, 10000);
             }
         }
     }

@@ -18,13 +18,15 @@ export default {
     'comp-footer':Footer
   },
   mounted(){
-    this.$store.dispatch("FetchPlayers");
+    // this.$store.dispatch("FetchPlayers");
   }
 }
 </script>
 
 <style>
 :root{
+    --line-height:45px;
+
     --header-height: 80px;
 
     /* Colors */
@@ -34,6 +36,8 @@ export default {
     --col-grey-text:#777;
     --col-grey-background:#f3f3f3;
     --col-white-main:#fff;
+
+    color: var(--col-grey-text);
 }
 
 *{

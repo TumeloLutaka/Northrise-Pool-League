@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {
-    getFirestore, collection, getDocs, 
+    getFirestore, collection, onSnapshot, 
     addDoc
 } from 'firebase/firestore';
 
@@ -42,6 +42,15 @@ export async function FetchPlayers (){
     return data;
 
 }
+import store from './store.js';
+onSnapshot(colRef, (snapshot) => {
+    let players = [];
+    snapshot.docs.forEach((player) => {
+        players.push({...player.data(), id: player.id})
+    })
+    // console.log(players);
+    store.commit('SetPlayers', players);
+})
 export function AddPlayer(playerObj){
     // alert("Working");
     addDoc(colRef, playerObj)

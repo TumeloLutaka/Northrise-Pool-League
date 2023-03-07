@@ -53,10 +53,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="player in topFiveStandings" :key="player.id">
-                  <td>{{ player.name }}</td>
-                  <td>{{ player.matchesPlayed }}</td>
-                  <td>{{ player.points }}</td>
+                <tr v-for="player in players" :key="player.id">
+                  <td>{{ player["First Name"] }} {{ player["Last Name"] }}</td>
+                  <td>{{ player["Matches"]}}</td>
+                  <td>{{ player.Points }}</td>
                 </tr>
               </tbody>
             </table>
@@ -95,15 +95,14 @@
       components:{
         "comp-carousel": Carousel
       },
+      computed: {
+        players() {
+          let players = this.$store.state.players;
+          return players.sort((a, b) => b.Points - a.Points).slice(0, 5);
+        },
+      },
       data() {
         return {
-          topFiveStandings: [
-            { id: 1, name: 'John Smith', matchesPlayed: 8, points: 24 },
-            { id: 2, name: 'Jane Doe', matchesPlayed: 7, points: 21 },
-            { id: 3, name: 'Bob Johnson', matchesPlayed: 6, points: 18 },
-            { id: 4, name: 'Alice Wong', matchesPlayed: 6, points: 16 },
-            { id: 5, name: 'Chris Lee', matchesPlayed: 5, points: 15 }
-          ], // The top five players in the league standings
           tenMostRecentMatches: [
             { id: 1, player1: 'John', player2: 'Jane', winner: 'Jane', score: '3' },
             { id: 2, player1: 'Mike', player2: 'Kate', winner: 'Mike', score: '4' },
@@ -136,7 +135,7 @@
     font-size: 18px;
     /* font-weight: 600; */
     width: 80%;
-    line-height: 45px;
+    line-height: var(--line-height);
     color: #777;
   }
 

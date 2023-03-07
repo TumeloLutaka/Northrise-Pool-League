@@ -60,13 +60,19 @@
         if (allClear) {
           //Get all the information and 
           AddPlayer({
+            "Debut Wins": 0,
+            "Debut Loses": 0,
             "First Name": document.querySelector("#firstName").value,
             "Last Name": document.querySelector("#lastName").value,
-            "Student ID Number": document.querySelector("#studentId").value,
+            "Loses": 0,
+            "Phone Number": document.querySelector("#phone").value,
+            "Points": 0,
             "Program": document.querySelector("#program").value,
-            "Phone Number": document.querySelector("#phone").value
+            "Student ID Number": document.querySelector("#studentId").value,
+            "Wins": 0
           });
           alert('All clear!');
+          this.$router.push("/Leaderboards")
         }else{
           alert("Enter all details!");
         }

@@ -8,20 +8,23 @@ const store = new Vuex.Store({
     mutations: {
         SetPlayers(state, players){
             state.players = players;
-            console.log(state.players[0]);
         }
     },
     actions: {
-        async FetchPlayers(context) {
-            const players = await FetchPlayers();
+        // async FetchPlayers(context) {
+        //     const players = await FetchPlayers();
             
-            console.log(players);
-            context.commit('SetPlayers', players);
-        }
+        //     console.log(players);
+        //     context.commit('SetPlayers', players);
+        // }
     },
     getters: {
-      getCount: state => {
-        return state.count;
+      GetTopFive(state) {
+        //Sort all the players in the array.
+        let sortedPlayers = state.players.sort((a, b) => a.points - b.points)
+
+        //returning the five players
+        return sortedPlayers.slice(0, 5);
       }
     }
   });
