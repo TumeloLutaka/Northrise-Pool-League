@@ -5,7 +5,7 @@
         <div class="hero-text">
           <h1>Welcome to Northrise University Pool League</h1>
           <p>Join the league and compete with other students for glory and prizes</p>
-          <router-link to="/Registration" class="btn">Register Now</router-link>
+          <router-link to="/Registration" class="hero-btn">Register Now</router-link>
         </div>
       </section>
 
@@ -211,7 +211,23 @@
     /* opacity: 0.5;  */
     z-index: -1;
   }
-.hero-text {
+.hero-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #e98824;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 18px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+  .hero-btn:hover {
+    background-color: #f89d19;
+  }
+  .hero-btn:active{
+    opacity: 0.8;
+  }
+  .hero-text {
   /* text-align: center; */
   padding: 20px;
   max-width: 600px;
@@ -226,21 +242,6 @@
   font-size: 24px;
   margin-bottom: 40px;
   color: #8bab5c;
-}
-
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #e98824;
-  color: #fff;
-  border-radius: 5px;
-  font-size: 18px;
-  text-decoration: none;
-  transition: background-color 0.2s;
-}
-
-.btn:hover {
-  background-color: #f89d19;
 }
 
 .profiles{
@@ -327,7 +328,12 @@
   color: var(--col-green-nu);
 }
 
-
+.registration{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0;
+}
 .registration a{
   color:#e98824;
 }
@@ -336,8 +342,9 @@
   }
 .registration p {
   font-size: 18px;
-  color: #777;
+  text-align: center;
   margin-top: 30px;
+  color: #777;
 }
 
 .section-heading{
