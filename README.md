@@ -1,5 +1,7 @@
 # nu-pool
 
+This was a small project used to practice vue by developing a hypothetical pool website for Northrise University in Ndola, Zambia
+
 ## Project setup
 ```
 npm install
